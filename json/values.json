@@ -1,0 +1,7 @@
+{
+    "iotValues":[
+      {"temperature":"35°C","humidity":"15%","loudness":"10dB","illuminance":"50 lux"}, 
+      {"temperature":"24°C","humidity":"45%","loudness":"30dB","illuminance":"300 lux"},
+      {"temperature":"22°C","humidity":"8%","loudness":"60dB","illuminance":"1000 lux"}
+    ]
+    }
