@@ -6,7 +6,23 @@ AFRAME.registerComponent("iot", {
     var text_illumination = document.querySelector("#text_illumination");
     var text_rain = document.querySelector("#text_rain");
     var text_humidity = document.querySelector("#text_humidity");
-    var illu = document.getElementById("illu");
+    var illu = document.querySelector("#illu");
+    var window = document.querySelector("#window");
+    var fan = document.querySelector("#fan");
+    var mist = document.querySelector("#mist");
+    var switch_mist = document.querySelector("#switch-mist");
+    var switch_vent = document.querySelector("#switch-vent");
+    var switch_light = document.querySelector("#switch-light");
+    var switch_window = document.querySelector("#switch-window");
+
+    var check_mist = document.querySelector("#check_mist");
+    var check_vent = document.querySelector("#check_vent");
+    var check_light = document.querySelector("#check_light");
+    var check_window = document.querySelector("#check_window");
+    var img_mist = document.querySelector("#img_mist");
+    var img_vent = document.querySelector("#img_vent");
+    var img_window = document.querySelector("#img_window");
+    var img_light = document.querySelector("#img_light");
     var obj_green_led = {
       method: "setGreenLedValue",
       params: false,
@@ -40,31 +56,74 @@ AFRAME.registerComponent("iot", {
     // this.httpGetAsync(url);
 
     // Service Worker
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("js/service-worker.js");
-    }
+    /* if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("js/service-worker.js");
+        }*/
 
     var m = document.querySelector("a-marker");
 
     m.addEventListener("markerFound", e => {
+      switch_mist.style.display = "block";
+      switch_vent.style.display = "block";
+      switch_light.style.display = "block";
+      switch_window.style.display = "block";
+      img_mist.style.display = "block";
+      img_vent.style.display = "block";
+      img_light.style.display = "block";
+      img_window.style.display = "block";
       this.loginTelemetry(loginUrl, telemetryUrl);
     });
 
+    m.addEventListener("markerLost", e => {
+      switch_mist.style.display = "none";
+      switch_vent.style.display = "none";
+      switch_light.style.display = "none";
+      switch_window.style.display = "none";
+
+      img_mist.style.display = "none";
+      img_vent.style.display = "none";
+      img_light.style.display = "none";
+      img_window.style.display = "none";
+    });
+
     var self = this;
-    this.el.addEventListener("click", function(evt) {
-      console.log("I was clicked at: ", evt.path[0].id);
+    check_vent.addEventListener("change", e => {
+      if (check_vent.checked) {
+        obj_fan.params = true;
+        self.loginRpc(loginUrl, rpcUrl, obj_fan);
+      } else {
+        obj_fan.params = false;
+        self.loginRpc(loginUrl, rpcUrl, obj_fan);
+      }
+    });
 
-      if (evt.path[0].id == "illu") {
-        if (illu.getAttribute("src") == "#switch_off") {
-          obj_green_led.params = true;
-          illu.setAttribute("src", "#switch_on");
+    check_light.addEventListener("change", e => {
+      if (check_light.checked) {
+        obj_green_led.params = true;
+        self.loginRpc(loginUrl, rpcUrl, obj_green_led);
+      } else {
+        obj_green_led.params = false;
+        self.loginRpc(loginUrl, rpcUrl, obj_green_led);
+      }
+    });
 
-          self.loginRpc(loginUrl, rpcUrl, obj_green_led);
-        } else {
-          obj_green_led.params = false;
-          illu.setAttribute("src", "#switch_off");
-          self.loginRpc(loginUrl, rpcUrl, obj_green_led);
-        }
+    check_window.addEventListener("change", e => {
+      if (check_window.checked) {
+        obj_window.params = true;
+        self.loginRpc(loginUrl, rpcUrl, obj_window);
+      } else {
+        obj_window.params = false;
+        self.loginRpc(loginUrl, rpcUrl, obj_window);
+      }
+    });
+
+    check_mist.addEventListener("change", e => {
+      if (check_mist.checked) {
+        obj_mist.params = true;
+        self.loginRpc(loginUrl, rpcUrl, obj_mist);
+      } else {
+        obj_mist.params = false;
+        self.loginRpc(loginUrl, rpcUrl, obj_mist);
       }
     });
   },

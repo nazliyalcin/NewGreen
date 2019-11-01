@@ -3,8 +3,6 @@
   <head>
      
     <!-- Aframe -->
- 
-    
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <!-- <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script> -->
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
@@ -22,110 +20,84 @@
     <!-- Curve  -->
    
     <script src="https://unpkg.com/aframe-curve-component/dist/aframe-curve-component.min.js"></script>
-
-     <!-- Embedded -->
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script> 
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script> 
     <script src="js/aframe-material.js"></script>
+    <script type="text/javascript">
+      AFRAME.ASSETS_PATH = "./assets";
+    </script>
     <link rel="stylesheet" type="text/css" href="css/switch.css">
-
-    <link rel="manifest" href="json/manifest.json">
     
   </head>
   <body>
-      <script type="text/javascript" src="js/methods.js"></script>
-   
-   <!--<img id="logo" src="img/ericsson_logo.png" style='left:0%;top:0px; z-index:2; position:fixed; display:none;' /> 
-    <label id="text" style=' position:fixed;width:10%; z-index: 2; display:none;color:white;'>Smart Sera</label>
-    <img id="banner" src="img/black-banner.png" style='top:0px; z-index:1; position:fixed;display:none;' /> 
-    <label id="switch" style=' position:fixed;top:10px; z-index: 1; display:none;'>
-        <input type="checkbox" style='display:none;' >
-        <span class="slider round"></span>
-    </label>-->
+    <script type="text/javascript" src="js/methods.js">
 
+    </script>
+    
+    <img id="img_mist" src="img/mist.png" />
+    <label class="switch" id="switch-mist" >
+      <input type="checkbox" id="check_mist" >
+      <span class="slider round"></span>
+    </label>
+    
+    <img id="img_vent" src="img/vent.png" />
+    <label class="switch" id="switch-vent">
+      <input type="checkbox" id="check_vent">
+      <span class="slider round"></span>
+    </label>
+    
+    <img id="img_light" src="img/light.png" />
+    <label class="switch" id="switch-light">
+      <input type="checkbox" id="check_light">
+      <span class="slider round"></span>
+    </label>
+    
+    <img id="img_window" src="img/window.png" />
+    <label class="switch" id="switch-window">
+      <input type="checkbox" id="check_window">
+      <span class="slider round"></span>
+    </label>
 
-
-
-    <a-scene vr-mode-ui="enabled: false" embedded artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 5;' arjs='debugUIEnabled: false;' > 
+    <a-scene embedded  arjs="sourceType: webcam;trackingMethod: best; debugUIEnabled:false " cursor="rayOrigin: mouse" >
           
           <a-assets>
-              <img id="arrow" src="img/arrows.png" /> 
-              <img id="temperature" src="img/temperature.png" /> 
-              <img id="humidity" src="img/humidity.png" /> 
-              <img id="rain" src="img/rain.png" /> 
-              <img id="illumination" src="img/illuminance.png" /> 
-              <img id="switch_on" src="img/switch_on_illu.png" />
-              <img id="switch_off" src="img/switch_off_illu.png" />
-
-          </a-assets>
-
-     
-          
              
-          <a-marker id="vuforia" preset="custom" type='pattern' url='img/ericsson.patt' iot > 
-
-            
-           
-            <!-- Temperature-->
-            <a-image src="#temperature"  scale="1 1 0" rotation="-90 0 0" position="-2.0 0 -1.5"> </a-image>
-            <a-text id="text_temparature"  width="4" rotation="-90 0 0 "  position="-2.15 0.1 -1.2" ></a-text>
-            <!-- <a-text  width="3" rotation="-90 0 0 " value="Actual Temperature" position="-2.5 0.1 -0.80" ></a-text>-->
-            <!-- Illuminance -->
-            <a-image id="naber" src="#illumination"  scale="1 1 0" rotation="-90 0 0" position="-2.0 0 -0.5"> </a-image>
-            <a-text id="text_illumination"  width="4" rotation="-90 0 0 "  position="-2.15 0.2 -0.2" ></a-text>
-            <!--<a-text  width="3" rotation="-90 0 0 " value="Illumination" position="1.7 0.1 -0.80" ></a-text>-->
-            <!-- Loudness -->
-            <a-image src="#rain" scale="1 1 0" rotation="-90 0 0" position="-2.0 0 0.5"> </a-image>
-            <a-text id="text_rain"  width="4" rotation="-90 0 0 "  position="-2.4 0.1 0.8" ></a-text>
-            <!-- <a-text  width="3" rotation="-90 0 0 " value="Rain" position="-2.3 0.1 2.1" ></a-text>-->
-            <!-- Humidity -->
-            <a-image src="#humidity"  scale="1 1 0" rotation="-90 0 0" position="-2.0 0 1.5"> </a-image>
-            <a-text id="text_humidity"  width="4" rotation="-90 0 0 "  position="-2.1 0.1 1.8" ></a-text>
-            <!--<a-text  width="3" rotation="-90 0 0 " value="Humidity" position="1.7 0.1 2.1" ></a-text>-->
-            
-            <a-image id="illu" src="#switch_off" scale="1 1 0" rotation="-90 0 0" position="0.0 0 -0.5"> </a-image>
-        
-            <a-image id="window" src="#switch_off" scale="1 1 0" rotation="-90 0 0" position="2.0 0 -0.5"> </a-image>
-           
-            <a-image id="fan" src="#switch_off" scale="1 1 0" rotation="-90 0 0" position="2.0 0 0.5"> </a-image>
-
-            <a-image id="mist" src="#switch_off" scale="1 1 0" rotation="-90 0 0" position="2.0 0 1.5"> </a-image>
-            
-           
-            
-
-
-            
-            
-            <!-- Arrows -->
-            <!-- <a-image src="#arrow" rotation="-90 0 0 " scale="2 2 0"> </a-image>
-        
-            
-            <a-box id="background" depth="0.01" height="3" width="3" rotation="-90 0 0 "
-                position="0.3 1 -0.25" opacity="0" ></a-box> -->
-
-            <!-- Bar Chart *******************************************************************    -->
-
-
-              
-
-          </a-marker> 
-
+              <img id="temperature" src="img/temperature.png" />
+              <img id="humidity" src="img/humidity.png" />
+              <img id="rain" src="img/rain.png" />
+              <img id="illumination" src="img/illuminance.png" />
+             
+          </a-assets>
+         
+          <a-marker preset="custom" type='pattern' url='img/ericsson.patt' iot > 
           
+          
+            
+          <!-- Temperature-->
+          <a-image  src="#temperature" scale="1 1 0" rotation="-90 0 0" position="-2.0 0 -1.5"> </a-image>
+          <a-text id="text_temparature" width="4" rotation="-90 0 0 " position="-2.15 0.1 -1.2"></a-text>
+          <!-- <a-text  width="3" rotation="-90 0 0 " value="Actual Temperature" position="-2.5 0.1 -0.80" ></a-text>-->
+          <!-- Illuminance -->
+          <a-image  src="#illumination" scale="1 1 0" rotation="-90 0 0" position="-2.0 0 -0.5"> </a-image>
+          <a-text id="text_illumination" width="4" rotation="-90 0 0 " position="-2.15 0.2 -0.2"></a-text>
+          <!--<a-text  width="3" rotation="-90 0 0 " value="Illumination" position="1.7 0.1 -0.80" ></a-text>-->
+          <!-- Loudness -->
+          <a-image  src="#rain" scale="1 1 0" rotation="-90 0 0" position="-2.0 0 0.5"> </a-image>
+          <a-text id="text_rain" width="4" rotation="-90 0 0 " position="-2.4 0.1 0.8"></a-text>
+          <!-- <a-text  width="3" rotation="-90 0 0 " value="Rain" position="-2.3 0.1 2.1" ></a-text>-->
+          <!-- Humidity -->
+          <a-image src="#humidity" scale="1 1 0" rotation="-90 0 0" position="-2.0 0 1.5"> </a-image>
+          <a-text id="text_humidity" width="4" rotation="-90 0 0 " position="-2.1 0.1 1.8"></a-text>
+            
+          
+          </a-marker> 
         
-           <!-- <a-entity id="camera" camera> </a-entity>
-            <a-entity laser-controls="hand: right"></a-entity>-->
 
-       <!-- <a-entity camera look-controls>
-          <a-entity cursor="fuse: true; fuseTimeout: 500" position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
-          </a-entity>
-        </a-entity>-->
-        
-        <a-entity camera>
-          <a-entity cursor="rayOrigin: mouse;fuse: false;"></a-entity>
-        </a-entity>
+            
 
-
-        
+            <a-entity camera >
+              
+            </a-entity>
               
 	 </a-scene>
 
