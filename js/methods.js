@@ -179,11 +179,14 @@ AFRAME.registerComponent("iot", {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         var telemetries = JSON.parse(xmlHttp.responseText);
 
-      text_temparature.setAttribute("value", telemetries.temperature[0].value);
-      text_humidity.setAttribute("value", telemetries.humidity[0].value);
+      text_temparature.setAttribute(
+        "value",
+        telemetries.temperature[0].value + " °C"
+      );
+      text_humidity.setAttribute("value", telemetries.humidity[0].value + " %");
       text_illumination.setAttribute(
         "value",
-        telemetries.illumination[0].value
+        telemetries.illumination[0].value + " LUX"
       );
       if (telemetries.rain[0].value == 1) {
         text_rain.setAttribute("value", "Not raining");

@@ -86,7 +86,7 @@ input:checked + .slider:before {
   position: fixed;
   top: 30%;
   z-index: 1;
-  right: 40%;
+  right: 30%;
   display: none;
 }
 
@@ -108,9 +108,9 @@ input:checked + .slider:before {
 
 #img_window {
   position: fixed;
-  top: 15%;
+  top: 18%;
   z-index: 1;
-  right: 38%;
+  right: 28%;
   display: none;
 }
 
@@ -120,4 +120,30 @@ input:checked + .slider:before {
   z-index: 1;
   right: 48.5%;
   display: none;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  #img_light,
+  #img_window,
+  #img_vent,
+  #img_mist {
+    height: 10%;
+    width: 10%;
+  }
+
+  #img_light {
+    top: 4%;
+  }
+
+  #img_window {
+    top: 20%;
+  }
+
+  #img_mist {
+    top: 40%;
+  }
+
+  #img_vent {
+    top: 39%;
+  }
 }
