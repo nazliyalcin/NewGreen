@@ -147,3 +147,30 @@ input:checked + .slider:before {
     top: 39%;
   }
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #img_light,
+  #img_window,
+  #img_vent,
+  #img_mist {
+    height: 14%;
+    width: 14%;
+  }
+
+  #img_light {
+    top: 0%;
+  }
+
+  #img_window {
+    top: 15%;
+    right: 30%;
+  }
+
+  #img_mist {
+    top: 35%;
+  }
+
+  #img_vent {
+    top: 34%;
+  }
+}
